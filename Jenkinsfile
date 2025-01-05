@@ -16,13 +16,13 @@ pipeline {
             }
         }
         stage('SonarQube') {
-            steps {
-                // Use the SonarQube environment wrapper
-                withSonarQubeEnv('SONARQUBE') { // Replace 'SonarQube' with the name of your configured SonarQube server in Jenkins
-                    sh './gradlew sonar'
-                }
+         steps {
+            // Use the SonarQube environment wrapper
+            withSonarQubeEnv('SONARQUBE') { // Assurez-vous que 'SONARQUBE' est le nom exact de votre serveur SonarQube configuré dans Jenkins
+                bat './gradlew.bat sonar'
             }
         }
+}
 
         stage('Code Quality') {
              steps {
