@@ -40,12 +40,12 @@ sonar {
 
     properties {
         property "sonar.projectKey", "mezenner-ci-cd"
-        property "sonar.host.url", "http://sonarqube-custom:9000/"
+        property "sonar.host.url", "http://localhost:9000/"
         property "sonar.java.binaries", "build/classes/java/main"
         property "sonar.sources", "src/main/java"
         property "sonar.tests", "src/test/java"
         property "sonar.login", "admin"
-        property "sonar.password", "Mezenner_2003"
+        property "sonar.password", "adminadmin"
     }
 }
 
