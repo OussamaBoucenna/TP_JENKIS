@@ -34,5 +34,23 @@ pipeline {
                  }
              }
          }
+         stage('Build') {
+             steps {
+                 script {
+                     // Générer le fichier JAR
+                     bat 'gradlew.bat jar'
+
+                     // Générer la documentation
+                     bat 'gradlew.bat javadoc'
+                 }
+             }
+             post {
+                 success {
+                     // Archiver le fichier JAR généré et la documentation
+                     archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                     archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
+                 }
+             }
+         }
     }
 }
