@@ -60,14 +60,23 @@ pipeline {
      post {
               success {
                     // Archiver le fichier JAR généré et la documentation
-                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-                    archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
+                  //  archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                   // archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
 
                       mail(
-                                              to: 'lo_boucenna@esi.dz',
-                                              subject: 'Deployment Success - Project mezenner-ci-cd',
-                                              body: 'The deployment for the project mezenner-ci-cd was successful.'
+                          to: 'lo_boucenna@esi.dz',
+                          subject: 'Deployment Success - Project mezenner-ci-cd',
+                          body: 'The deployment for the project mezenner-ci-cd was successful.'
                              )
                      }
-            }
+                    failure {
+                                         // Email Notification for Pipeline Failure
+                   mail(
+                     to: 'lo_boucenna@esi.dz',
+                      subject: 'Pipeline Failed - Project mezenner-ci-cd',
+                      body: 'The Jenkins pipeline for project mezenner-ci-cd has failed. Please check the logs for more details.'
+                     )
+
+                   }
+          }
 }
