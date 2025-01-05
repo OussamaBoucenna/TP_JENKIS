@@ -44,13 +44,7 @@ pipeline {
                      bat 'gradlew.bat javadoc'
                  }
              }
-             post {
-                 success {
-                     // Archiver le fichier JAR généré et la documentation
-                     archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-                     archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
-                 }
-             }
+
          }
          stage('Deploy') {
              steps {
@@ -60,5 +54,20 @@ pipeline {
                  }
              }
          }
+
+
     }
+     post {
+              success {
+                    // Archiver le fichier JAR généré et la documentation
+                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
+
+                      mail(
+                                              to: 'lo_boucenna@esi.dz',
+                                              subject: 'Deployment Success - Project mezenner-ci-cd',
+                                              body: 'The deployment for the project mezenner-ci-cd was successful.'
+                             )
+                     }
+            }
 }
