@@ -18,8 +18,22 @@ pipeline {
         }
         stage('SonarQube') {
             steps {
-                sh './gradlew sonar'
+                // Use the SonarQube environment wrapper
+                withSonarQubeEnv('sonar') { // Replace 'SonarQube' with the name of your configured SonarQube server in Jenkins
+                    sh './gradlew sonar'
+                }
             }
-        }    
+        }
+
+        stage('Code Quality') {
+             steps {
+                 script {
+                     def qualityGate = waitForQualityGate() // Wait for SonarQube's analysis result
+                     if (qualityGate.status != 'OK') {
+                         error "Pipeline failed due to Quality Gate failure: ${qualityGate.status}"
+                     }
+                 }
+             }
+         }
     }
 }

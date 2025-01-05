@@ -6,7 +6,10 @@ public class Matrix {
 	private int ncols;
 	private double[][] data;
 
-	public Matrix() {
+	public Matrix(double[][] dat) {
+		this.data = dat;
+		this.nrows = dat.length;
+		this.ncols = dat[0].length;
 	}
 
 	public double[][] getData() {
