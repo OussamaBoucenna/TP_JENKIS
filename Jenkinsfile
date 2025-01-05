@@ -52,5 +52,12 @@ pipeline {
                  }
              }
          }
+          stage('Deploy') {
+                          steps {
+                              script {
+                                  sh './gradlew publish'
+                              }
+                          }
+                      }
     }
 }
