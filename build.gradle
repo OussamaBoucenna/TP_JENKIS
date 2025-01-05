@@ -39,7 +39,7 @@ dependencies {
 sonar {
 
     properties {
-        property "sonar.projectKey", "oussama_test"
+        property "sonar.projectKey", "TP_JENKIS_OUSSAMA"
         property "sonar.host.url", "http://localhost:9000/"
         property "sonar.java.binaries", "build/classes/java/main"
         property "sonar.sources", "src/main/java"

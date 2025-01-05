@@ -65,16 +65,16 @@ pipeline {
 
                       mail(
                           to: 'lo_boucenna@esi.dz',
-                          subject: 'Deployment Success - Project mezenner-ci-cd',
-                          body: 'The deployment for the project mezenner-ci-cd was successful.'
+                          subject: 'Deployment Success - Project BOOUCENNA ',
+                          body: 'The deployment for the project BOUCENNA was successful.'
                              )
                      }
                     failure {
                                          // Email Notification for Pipeline Failure
                    mail(
                      to: 'lo_boucenna@esi.dz',
-                      subject: 'Pipeline Failed - Project mezenner-ci-cd',
-                      body: 'The Jenkins pipeline for project mezenner-ci-cd has failed. Please check the logs for more details.'
+                      subject: 'Pipeline Failed - Project BOUCENNA',
+                      body: 'The Jenkins pipeline for project BOUCENNA has failed. Please check the logs for more details.'
                      )
 
                    }
