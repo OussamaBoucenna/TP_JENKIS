@@ -68,6 +68,12 @@ pipeline {
                           subject: 'Deployment Success - Project BOOUCENNA ',
                           body: 'The deployment for the project BOUCENNA was successful.'
                              )
+                         // Slack Notification for Successful Deployment
+                       slackSend(
+                            channel: '#news-deployement',
+                             color: 'good',
+                             message: 'Deployment succeeded for project BOUCENNA-ci-cd!'
+                            )
                      }
                     failure {
                                          // Email Notification for Pipeline Failure
@@ -76,6 +82,11 @@ pipeline {
                       subject: 'Pipeline Failed - Project BOUCENNA',
                       body: 'The Jenkins pipeline for project BOUCENNA has failed. Please check the logs for more details.'
                      )
+         slackSend(
+                        channel: '#news-deployement',
+                        color: 'danger',
+                        message: 'Pipeline failed for project BOUCENNA-ci-cd. Check Jenkins for details!'
+                    )
 
                    }
           }
