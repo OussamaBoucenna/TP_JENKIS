@@ -3,10 +3,9 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                script {
-
-                    sh './gradlew test --tests "acceptation.DeterminantCalculatorFeature"'
-                    sh './gradlew test'
+               script {
+                    bat './gradlew.bat test --tests "acceptation.DeterminantCalculatorFeature"'
+                    bat './gradlew.bat test'
                 }
             }
             post {
