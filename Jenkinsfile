@@ -52,12 +52,13 @@ pipeline {
                  }
              }
          }
-          stage('Deploy') {
-                          steps {
-                              script {
-                                  sh './gradlew publish'
-                              }
-                          }
-                      }
+         stage('Deploy') {
+             steps {
+                 script {
+                     // Déployer avec Gradle sur Windows
+                     bat 'gradlew.bat publish'
+                 }
+             }
+         }
     }
 }
