@@ -52,10 +52,10 @@ sonar {
 publishing {
     repositories {
         maven {
-            url 'https://mymavenrepo.com/repo/edYDoHzDUcLXU4FF0QiH/'
+            url = uri('https://mymavenrepo.com/repo/BaqfmbkAZF22kIqFBPqP/')
             credentials {
-                username 'myMavenRepo'
-                password "12345678"
+                username = 'myMavenRepo'  // Replace with your actual username
+                password = 'dbzmomoh2003' // Replace with your actual password
             }
         }
     }
