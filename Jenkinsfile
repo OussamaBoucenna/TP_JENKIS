@@ -35,21 +35,20 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    // Générer le fichier JAR
-                    bat 'gradlew.bat jar'
-
-                    // Générer la documentation
-                    bat 'gradlew.bat javadoc'
-                }
-
-                // Archiver les artifacts
-                archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
-                archiveArtifacts artifacts: '**/build/docs/javadoc/**', allowEmptyArchive: true
-            }
-        }
+       stage('Build') {
+           steps {
+               script {
+                   bat './gradlew.bat jar'
+                   bat './gradlew.bat javadoc'
+               }
+           }
+           post {
+               success {
+                   archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                   archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
+               }
+           }
+       }
 
         stage('Deploy') {
             steps {
