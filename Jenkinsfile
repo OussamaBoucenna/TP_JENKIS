@@ -55,39 +55,34 @@ pipeline {
              }
          }
 
+         stage('Email Notification') {
+                      steps {
+                          script {
+                              currentBuild.result = currentBuild.result ?: 'SUCCESS'
+                              if (currentBuild.result == 'SUCCESS') {
+                                  echo 'Sending success notifications...'
+                                  mail to: 'lo_boucenna@esi.dz',
+                                       subject: "Build Success: ",
+                                       body: "The build and deployment for  was successful."
+                              } else {
+                                  echo 'Sending failure notifications...'
+                                  mail to: 'lo_boucenna@esi.dz',
+                                       subject: "Build Failed: ",
+                                       body: "The build for  failed. Check the logs for details."
+                              }
 
-    }
-     post {
-              success {
-                    // Archiver le fichier JAR généré et la documentation
-                  //  archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-                   // archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
 
-                      mail(
-                          to: 'lo_boucenna@esi.dz',
-                          subject: 'Deployment Success - Project BOOUCENNA ',
-                          body: 'The deployment for the project BOUCENNA was successful.'
-                             )
-                         // Slack Notification for Successful Deployment
-                       slackSend(
-                            channel: '#news-deployement',
-                             color: 'good',
-                             message: 'Deployment succeeded for project BOUCENNA-ci-cd!'
-                            )
-                     }
-                    failure {
-                                         // Email Notification for Pipeline Failure
-                   mail(
-                     to: 'lo_boucenna@esi.dz',
-                      subject: 'Pipeline Failed - Project BOUCENNA',
-                      body: 'The Jenkins pipeline for project BOUCENNA has failed. Please check the logs for more details.'
-                     )
-         slackSend(
-                        channel: '#news-deployement',
-                        color: 'danger',
-                        message: 'Pipeline failed for project BOUCENNA-ci-cd. Check Jenkins for details!'
-                    )
+                          }
+                      }
 
-                   }
-          }
+         }
+         stage('Slack Notification') {
+                      steps {
+                          slackSend channel: '#news-deployement',
+                                    color: 'good',
+                                    message: "Build  completed successfully 100 % ."
+                      }
+         }
+
+      }
 }
